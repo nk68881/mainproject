@@ -1,5 +1,3 @@
-console.log("CV page loaded.");
-
 // Theme toggle
 const themeLink = document.getElementById("theme-stylesheet");
 const themeBtn = document.getElementById("theme-toggle");
@@ -26,3 +24,5 @@ document.querySelectorAll(".toggle-btn").forEach(function (btn) {
     btn.textContent = hidden ? "Hide" : "Show";
   });
 });
+
+console.log("CV page loaded.");
