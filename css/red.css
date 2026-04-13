@@ -155,7 +155,61 @@ main {
   color: var(--muted);
 }
 
-@media (max-width: 600px) {
+/* Section header row */
+.section-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 14px;
+  padding-bottom: 6px;
+  border-bottom: 2px solid var(--dark);
+}
+
+.section-header h2 {
+  font-size: 20px;
+  color: var(--accent);
+  margin-bottom: 0;
+  padding-bottom: 0;
+  border-bottom: none;
+}
+
+.toggle-btn {
+  font-size: 12px;
+  padding: 3px 10px;
+  cursor: pointer;
+  border: 1px solid var(--accent);
+  background: transparent;
+  color: var(--accent);
+  border-radius: 4px;
+}
+
+.toggle-btn:hover {
+  background: var(--accent);
+  color: white;
+}
+
+/* Header controls */
+.header-controls {
+  margin-left: auto;
+}
+
+.ctrl-btn {
+  font-size: 13px;
+  padding: 8px 14px;
+  cursor: pointer;
+  border: 2px solid white;
+  background: transparent;
+  color: white;
+  border-radius: 6px;
+  white-space: nowrap;
+}
+
+.ctrl-btn:hover {
+  background: white;
+  color: var(--dark);
+}
+
+
   .site-header {
     flex-direction: column;
     text-align: center;
