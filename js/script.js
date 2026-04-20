@@ -25,4 +25,87 @@ document.querySelectorAll(".toggle-btn").forEach(function (btn) {
   });
 });
 
+// Contact form validation
+document.addEventListener("DOMContentLoaded", function () {
+  const contactForm = document.getElementById("contact-form");
+
+  function setError(inputId, message) {
+    const input = document.getElementById(inputId);
+    const error = document.getElementById(inputId + "-error");
+    input.classList.add("input-error");
+    error.textContent = message;
+  }
+
+  function clearError(inputId) {
+    const input = document.getElementById(inputId);
+    const error = document.getElementById(inputId + "-error");
+    input.classList.remove("input-error");
+    error.textContent = "";
+  }
+
+  function isValidEmail(value) {
+    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
+  }
+
+  function containsDigit(value) {
+    return /\d/.test(value);
+  }
+
+  function validateForm() {
+    let valid = true;
+
+    const firstName = document.getElementById("first-name").value.trim();
+    const lastName = document.getElementById("last-name").value.trim();
+    const email = document.getElementById("email").value.trim();
+    const message = document.getElementById("message").value.trim();
+
+    clearError("first-name");
+    clearError("last-name");
+    clearError("email");
+    clearError("message");
+
+    if (!firstName) {
+      setError("first-name", "First name is required.");
+      valid = false;
+    } else if (containsDigit(firstName)) {
+      setError("first-name", "First name must not contain digits.");
+      valid = false;
+    }
+
+    if (!lastName) {
+      setError("last-name", "Last name is required.");
+      valid = false;
+    } else if (containsDigit(lastName)) {
+      setError("last-name", "Last name must not contain digits.");
+      valid = false;
+    }
+
+    if (!email) {
+      setError("email", "Email is required.");
+      valid = false;
+    } else if (!isValidEmail(email)) {
+      setError("email", "Please enter a valid email address.");
+      valid = false;
+    }
+
+    if (!message) {
+      setError("message", "Message is required.");
+      valid = false;
+    }
+
+    return valid;
+  }
+
+  contactForm.addEventListener("submit", function (e) {
+    e.preventDefault();
+    const successMsg = document.getElementById("form-success");
+    successMsg.hidden = true;
+
+    if (validateForm()) {
+      contactForm.reset();
+      successMsg.hidden = false;
+    }
+  });
+});
+
 console.log("CV page loaded.");
