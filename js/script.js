@@ -109,3 +109,30 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 console.log("CV page loaded.");
+
+// Load dynamic data from JSON
+fetch("data/cv-data.json")
+  .then(function (response) {
+    return response.json();
+  })
+  .then(function (data) {
+    const skillsList = document.getElementById("skills-list");
+    data.skills.forEach(function (skill) {
+      const li = document.createElement("li");
+      li.textContent = skill;
+      skillsList.appendChild(li);
+    });
+
+    const projectsList = document.getElementById("projects-list");
+    data.projects.forEach(function (project) {
+      const li = document.createElement("li");
+      const strong = document.createElement("strong");
+      strong.textContent = project.name;
+      li.appendChild(strong);
+      li.appendChild(document.createTextNode(" \u2013 " + project.description));
+      projectsList.appendChild(li);
+    });
+  })
+  .catch(function (err) {
+    console.error("Failed to load CV data:", err);
+  });
