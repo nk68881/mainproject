@@ -101,10 +101,47 @@ document.addEventListener("DOMContentLoaded", function () {
     const successMsg = document.getElementById("form-success");
     successMsg.hidden = true;
 
-    if (validateForm()) {
-      contactForm.reset();
-      successMsg.hidden = false;
+    if (!validateForm()) {
+      return;
     }
+
+    const submitBtn = contactForm.querySelector(".submit-btn");
+    submitBtn.disabled = true;
+
+    const payload = {
+      firstName: document.getElementById("first-name").value.trim(),
+      lastName: document.getElementById("last-name").value.trim(),
+      email: document.getElementById("email").value.trim(),
+      message: document.getElementById("message").value.trim()
+    };
+
+    fetch("/api/contact", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(payload)
+    })
+      .then(function (response) {
+        if (!response.ok) {
+          return response.json().then(function (data) {
+            throw new Error(data.error || "Server error. Please try again.");
+          });
+        }
+        return response.json();
+      })
+      .then(function () {
+        contactForm.reset();
+        successMsg.hidden = false;
+      })
+      .catch(function (err) {
+        const errorMsg = document.createElement("p");
+        errorMsg.className = "form-error";
+        errorMsg.textContent = "✗ " + err.message;
+        contactForm.appendChild(errorMsg);
+        setTimeout(function () { errorMsg.remove(); }, 5000);
+      })
+      .finally(function () {
+        submitBtn.disabled = false;
+      });
   });
 });
 
