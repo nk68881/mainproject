@@ -226,6 +226,92 @@ main {
   font-weight: 600;
 }
 
+/* Notes */
+.notes-input-row {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 4px;
+}
+
+.notes-input-row input {
+  flex: 1;
+  border: 1px solid #86efac;
+  border-radius: 4px;
+  padding: 8px 10px;
+  font-size: 14px;
+  font-family: inherit;
+  color: var(--text);
+  background: #fff;
+  transition: border-color 0.2s;
+}
+
+.notes-input-row input:focus {
+  outline: none;
+  border-color: var(--accent);
+}
+
+.add-note-btn {
+  padding: 8px 18px;
+  background: var(--accent);
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-size: 14px;
+  cursor: pointer;
+  font-family: inherit;
+  white-space: nowrap;
+}
+
+.add-note-btn:hover {
+  background: var(--dark);
+}
+
+.notes-list {
+  list-style: none;
+  display: grid;
+  gap: 8px;
+  margin-top: 14px;
+}
+
+.notes-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #f0fdf4;
+  border: 1px solid #86efac;
+  border-radius: 4px;
+  padding: 8px 12px;
+  font-size: 14px;
+  color: var(--muted);
+}
+
+.notes-item-text {
+  flex: 1;
+  word-break: break-word;
+}
+
+.remove-note-btn {
+  flex-shrink: 0;
+  margin-left: 12px;
+  background: transparent;
+  border: 1px solid var(--accent);
+  color: var(--accent);
+  border-radius: 4px;
+  width: 26px;
+  height: 26px;
+  font-size: 16px;
+  line-height: 1;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.remove-note-btn:hover {
+  background: var(--accent);
+  color: white;
+}
+
 /* Footer */
 .site-footer {
   text-align: center;

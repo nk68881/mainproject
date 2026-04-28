@@ -135,4 +135,73 @@ fetch("data/cv-data.json")
     console.error("Failed to load CV data:", err);
   });
 
+// Notes – localStorage-backed list
+(function () {
+  var STORAGE_KEY = "cv-notes";
+
+  function getNotes() {
+    try {
+      return JSON.parse(localStorage.getItem(STORAGE_KEY)) || [];
+    } catch (e) {
+      return [];
+    }
+  }
+
+  function saveNotes(notes) {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(notes));
+  }
+
+  function renderNotes() {
+    var notes = getNotes();
+    var list = document.getElementById("notes-list");
+    list.innerHTML = "";
+    notes.forEach(function (note) {
+      var li = document.createElement("li");
+      li.className = "notes-item";
+
+      var span = document.createElement("span");
+      span.className = "notes-item-text";
+      span.textContent = note.text;
+
+      var removeBtn = document.createElement("button");
+      removeBtn.className = "remove-note-btn";
+      removeBtn.textContent = "×";
+      removeBtn.setAttribute("aria-label", "Remove note");
+      removeBtn.addEventListener("click", function () {
+        var current = getNotes();
+        saveNotes(current.filter(function (n) { return n.id !== note.id; }));
+        renderNotes();
+      });
+
+      li.appendChild(span);
+      li.appendChild(removeBtn);
+      list.appendChild(li);
+    });
+  }
+
+  document.addEventListener("DOMContentLoaded", function () {
+    renderNotes();
+
+    var form = document.getElementById("notes-form");
+    var input = document.getElementById("note-input");
+    var errorEl = document.getElementById("note-error");
+
+    form.addEventListener("submit", function (e) {
+      e.preventDefault();
+      var text = input.value.trim();
+      if (!text) {
+        errorEl.textContent = "Please enter some text before adding.";
+        input.focus();
+        return;
+      }
+      errorEl.textContent = "";
+      var notes = getNotes();
+      notes.push({ id: Date.now(), text: text });
+      saveNotes(notes);
+      input.value = "";
+      renderNotes();
+    });
+  });
+})();
+
 console.log("CV page loaded.");
