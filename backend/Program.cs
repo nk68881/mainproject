@@ -73,7 +73,7 @@ app.MapPost("/api/contact", async (ContactMessage contact) =>
         contactsFileLock.Release();
     }
 
-    return Results.Ok(new { message = "Your message has been saved successfully." });
+    return Results.Ok("Your message has been saved successfully.");
 });
 
 app.Run();

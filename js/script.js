@@ -98,6 +98,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
   contactForm.addEventListener("submit", function (e) {
     e.preventDefault();
+    e.stopPropagation();
     const successMsg = document.getElementById("form-success");
     successMsg.hidden = true;
 
@@ -115,7 +116,7 @@ document.addEventListener("DOMContentLoaded", function () {
       message: document.getElementById("message").value.trim()
     };
 
-    fetch("/api/contact", {
+    fetch("http://127.0.0.1:5501/api/contact", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(payload)
