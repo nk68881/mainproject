@@ -119,6 +119,23 @@
 
     <section class="section">
       <div class="section-header">
+        <h2>My Notes</h2>
+        <button class="toggle-btn">Hide</button>
+      </div>
+      <div class="section-content">
+        <form id="notes-form" novalidate>
+          <div class="notes-input-row">
+            <input type="text" id="note-input" placeholder="Add a task, project note, or any entry…" maxlength="200" />
+            <button type="submit" class="add-note-btn">Add</button>
+          </div>
+          <span class="field-error" id="note-error"></span>
+        </form>
+        <ul id="notes-list" class="notes-list"></ul>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section-header">
         <h2>Contact Me</h2>
         <button class="toggle-btn">Hide</button>
       </div>
